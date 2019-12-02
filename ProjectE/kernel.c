@@ -11,8 +11,12 @@ void terminate();
 void writeSector(char*,int);
 void deleteFile(char*);
 void writeFile(char* buffer, char* filename, int numberOfSectors);
-
+void handleTimerInterrupt(int segment, int sp);
 void handleInterrupt21(int, int, int, int);
+
+int processActive[8];
+int processStackPointer[8];
+int currentProcess;
 
 void main(){
     //printChar('x');
@@ -45,8 +49,15 @@ void main(){
 		// interrupt(0x21, 0, "messag not found\r\n", 0, 0);		/*no sectors read? then print an error*/
 	// }
 	// while(1);   
+	int i =0;
+	for(i=0;i<8;i++){
+		processActive[i]=0;
+		processStackPointer[i]=0xff00;
+	}
+	currentProcess = -1;
 	makeInterrupt21();
 	//interrupt(0x21,8,"this is a test message\r\n","testmg",3);
+	makeTimerInterrupt();
 	interrupt(0x21, 4, "shell", 0, 0);
 	while(1); 
 
@@ -330,6 +341,14 @@ void writeFile(char* buffer, char* filename, int numberOfSectors){
 			break;
 		}
 	}
+}
+
+void handleTimerInterrupt(int segment, int sp){
+	//printChar('T');
+	//printChar('i');
+	//printChar('c');
+	
+	returnFromTimer(segment, sp);
 }
 
 void handleInterrupt21 (int AX, int BX, int CX, int DX){

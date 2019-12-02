@@ -123,15 +123,17 @@ void main(){
 				}
 			}
 			file2[6]='\0';
-			//syscall(0,"file 2\r\n");
-			//syscall(0,file2);
-			//syscall(0,"\r\nfile 1\r\n");
-			//syscall(0,file);
-			syscall(3,file,read,&sector);
-			//sector =1;
-			//syscall(0,read);
+			// syscall(0,file2);
+			// syscall(0," is the file name to copy to\r\n");
+			// syscall(0,file);
+			// syscall(0," file to copy from 1\r\n");
+			syscall(3,file,buffer,&sector);
+			// syscall(0,file2);
+			// syscall(0," is the file name to copy to\r\n");
+			// syscall(0,file);
+			// syscall(0," file to copy from 2\r\n");
 			if(sector!=0){
-				syscall(8,read,file2,sector);
+				syscall(8,buffer,file2,sector);
 			}
 			else{
 				syscall(0,"unable to find file to copy\r\n");

@@ -1,6 +1,6 @@
 #!/bin/bash
 #GiuseppeCarchidi, Federico Read, JoeyGaruti, Fall 2019
-rm diskc.img && \
+rm diskc.img
 dd if=/dev/zero of=diskc.img bs=512 count=1000 && \
 nasm bootload.asm && \
 dd if=bootload of=diskc.img bs=512 count=1 conv=notrunc && \

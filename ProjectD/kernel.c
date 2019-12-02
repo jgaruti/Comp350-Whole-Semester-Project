@@ -131,13 +131,13 @@ void readFile(char* filename, char* buffer, int* sector){
 	int fileFound = 0;
 	int sectorNumber;
 	int bufferAddress;
-	//int matchLoop = 0;
+	int matchLoop = 0;
 	*sector = 0;
 	readSector(dir,2);
 	for(fileEntry=0; fileEntry<512; fileEntry+=32){	//loops through possible file locations in sector
 		//printChar(filename[fileEntry/32]);
 		match = 1;
-		//matchLoop = 0;
+		matchLoop = 0;
 		//printString("looped no?\r\n");
 		for(i=0;i<6;i++){
 			//printString("looped\r\n");
@@ -150,11 +150,11 @@ void readFile(char* filename, char* buffer, int* sector){
 			}
 			// if(filename[i]==dir[fileEntry+i]){
 				// matchLoop++;
-			// }
-			// if(matchloop!=0){
-			// printchar(matchloop+'0');
-			// printchar('\r');
-			// printchar('\n');
+			 // }
+			// if(matchLoop!=0){
+				// printChar(matchLoop+'0');
+				// printChar('\r');
+				// printChar('\n');
 			// }
 		}
 		if(match==1){
